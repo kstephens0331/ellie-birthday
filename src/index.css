@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom font imports */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap');
+
+body {
+  @apply bg-cream text-coffee font-serif;
+}
+
+@keyframes floatDown {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.falling-emoji {
+  position: absolute;
+  top: -5%;
+  animation: floatDown 8s linear infinite;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+.perspective {
+  perspective: 1000px;
+}
+
+.transform-style {
+  transform-style: preserve-3d;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+html {
+  scroll-behavior: smooth;
+}
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+a:hover,
+button:hover {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='24' font-size='24'>☕</text></svg>") 16 16, auto;
+}

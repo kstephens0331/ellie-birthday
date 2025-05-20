@@ -1,0 +1,10 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:Ellie Bean's 1st Birthday Brunch
+DESCRIPTION:Join us for brunch to celebrate Ellie turning one!
+DTSTART;TZID=America/Chicago:20251018T100000
+DTEND;TZID=America/Chicago:20251018T130000
+LOCATION:2378 Strong Horse Dr, Conroe, TX 77301
+END:VEVENT
+END:VCALENDAR
