@@ -9,14 +9,6 @@ const RSVPForm = () => {
   const [phone, setPhone] = useState("");
   const [note, setNote] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({ name, guests, phone, note });
-    setSubmitted(true);
-    setTimeout(() => {
-      setFlipped(false);
-    }, 2000);
-  };
 
   return (
     <section id="rsvp" className="py-16 px-6 text-center bg-cream font-serif relative z-10">
@@ -43,9 +35,14 @@ const RSVPForm = () => {
             {submitted ? (
               <p className="text-green-600 font-semibold mt-20">RSVP submitted! Thank you 🥰</p>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4 text-left">
+              <form
+  action="https://formspree.io/f/xnndrwjy"
+  method="POST"
+  className="space-y-4 text-left"
+>
                 <input
                   type="text"
+                  name="name"
                   required
                   placeholder="Your Name"
                   value={name}
@@ -54,6 +51,7 @@ const RSVPForm = () => {
                 />
                 <input
                   type="number"
+                  name="guests"
                   min={1}
                   required
                   placeholder="# of Guests"
@@ -63,6 +61,7 @@ const RSVPForm = () => {
                 />
                 <input
                   type="tel"
+                  name="phone"
                   required
                   placeholder="Phone Number (for text reminder)"
                   value={phone}
@@ -70,6 +69,7 @@ const RSVPForm = () => {
                   className="w-full px-4 py-2 border border-coffee rounded"
                 />
                 <textarea
+                 name="note"
                   placeholder="Message or allergies?"
                   value={note}
                   onChange={(e) => setNote(e.target.value)}
