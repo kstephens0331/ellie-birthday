@@ -41,7 +41,7 @@ const Guestbook = () => {
 
   return (
     <section id="guestbook" className="bg-cream py-16 px-4 text-center font-serif relative z-10">
-      <h2 className="text-2xl md:text-3xl font-semibold mb-6">Leave Ellie a Message</h2>
+      <h2 className="text-2xl md:text-3xl font-semibold mb-6">Leave Ellie a Message, add a photo if you'd like!</h2>
 
       <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-4">
         <input
