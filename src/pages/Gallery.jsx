@@ -5,6 +5,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { motion } from "framer-motion";
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import { db } from "../firebase";
 
 // Static images 1–20
 import ellie1 from "../assets/images/ellie_1.jpg";
@@ -32,19 +34,6 @@ const Gallery = () => {
   const [fullscreenImage, setFullscreenImage] = useState(null);
   const [guestPhotos, setGuestPhotos] = useState([]);
 
-  useEffect(() => {
-    const now = new Date();
-    const eventDay = new Date("2025-10-18T00:00:00");
-
-    if (now >= eventDay) {
-      const entries = JSON.parse(localStorage.getItem("ellieGuestbook")) || [];
-      const guestImages = entries
-        .filter((entry) => entry.photo)
-        .map((entry) => entry.photo);
-      setGuestPhotos(guestImages);
-    }
-  }, []);
-
   const staticImages = [
     ellie1, ellie2, ellie3, ellie4, ellie5,
     ellie6, ellie7, ellie8, ellie9, ellie10,
@@ -52,11 +41,28 @@ const Gallery = () => {
     ellie16, ellie17, ellie18, ellie19, ellie20,
   ];
 
+  useEffect(() => {
+    const now = new Date();
+    const eventDay = new Date("2025-10-18T00:00:00");
+
+    if (now >= eventDay) {
+      const q = query(collection(db, "guestbook"), orderBy("created", "desc"));
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        const photos = snapshot.docs
+          .map((doc) => doc.data())
+          .filter((entry) => entry.photo)
+          .map((entry) => entry.photo);
+        setGuestPhotos(photos);
+      });
+      return () => unsubscribe();
+    }
+  }, []);
+
   const allImages = [...staticImages, ...guestPhotos];
 
   return (
     <section id="gallery" className="bg-cream py-16 px-4 font-serif text-center relative z-10">
-      <h2 className="text-2xl md:text-3xl font-semibold mb-8">Bean's First Year ☕</h2>
+      <h2 className="text-2xl md:text-3xl font-semibold mb-8">A Look Back at the Day ☀️</h2>
 
       <div className="max-w-4xl mx-auto">
         <Swiper
@@ -78,12 +84,19 @@ const Gallery = () => {
               >
                 <div className="relative group">
                   <img
-  src={img}
-  alt={`Gallery image ${index + 1}`}
-  className="max-w-[700px] max-h-[500px] w-full h-auto mx-auto rounded shadow-md object-contain cursor-pointer"
-  onClick={() => setFullscreenImage(img)}
-/>
-                  
+                    src={img}
+                    alt={`Gallery image ${index + 1}`}
+                    className="max-w-[700px] max-h-[500px] w-full h-auto mx-auto rounded shadow-md object-contain cursor-pointer"
+                    onClick={() => setFullscreenImage(img)}
+                  />
+                  <a
+                    href={img}
+                    download={`ellie_image_${index + 1}.jpg`}
+                    className="absolute bottom-4 right-4 bg-white/80 text-coffee text-xs px-3 py-1 rounded shadow-md opacity-0 group-hover:opacity-100 transition"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Download 📥
+                  </a>
                 </div>
               </motion.div>
             </SwiperSlide>
@@ -99,7 +112,7 @@ const Gallery = () => {
           <img
             src={fullscreenImage}
             alt="Full screen preview"
-            className="max-w-full max-h-[90vh] rounded shadow-lg"
+            className="max-w-[900px] max-h-[90vh] mx-auto rounded shadow-lg object-contain"
           />
         </div>
       )}
