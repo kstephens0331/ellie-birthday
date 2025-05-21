@@ -33,23 +33,32 @@ const HeroSection = () => {
       <div className="absolute top-6 left-6 animate-pulse text-[24px]">☕</div>
       <div className="absolute top-10 right-6 animate-bounce text-[20px]">🥐</div>
 
-      <motion.h1
+      <motion.h2
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="text-2xl md:text-4xl font-script text-coffee mb-1"
+        className="text-3xl md:text-4xl font-script text-coffee mb-1"
       >
-        A tini bit older
-      </motion.h1>
+        Ellie Bean
+      </motion.h2>
 
-      <motion.h2
+      <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 1 }}
-  className="text-3xl md:text-5xl font-script shimmer-text"
+  className="text-2xl md:text-4xl font-script text-coffee mb-1"
 >
-  Ellie Bean
-</motion.h2>
+  Is
+</motion.h1>
+
+      <motion.h1
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 1 }}
+  className="text-2xl md:text-4xl font-script text-coffee mb-1"
+>
+  A Tini Bit Older
+</motion.h1>
 
       <p className="mt-2 text-base md:text-lg font-serif text-coffee">
         Join us to celebrate her 1st Birthday Brunch
