@@ -1,0 +1,14 @@
+.swiper-button-prev,
+.swiper-button-next {
+  color: #5C4033; /* Ellie’s coffee brown */
+}
+
+.swiper-pagination-bullet {
+  background-color: #d9c4b0;
+  opacity: 0.6;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #A9745F;
+  opacity: 1;
+}

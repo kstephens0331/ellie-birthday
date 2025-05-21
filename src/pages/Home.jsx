@@ -2,7 +2,6 @@ import HeroSection from "../components/HeroSection";
 import Countdown from "../components/Countdown";
 import EventDetails from "../components/EventDetails";
 import RSVPForm from "../components/RSVPForm";
-import Guestbook from "../components/Guestbook";
 import FadeInWrapper from "../components/FadeInWrapper";
 import Footer from "../components/Footer";
 import SectionDivider from "../components/SectionDivider";
@@ -52,12 +51,6 @@ const Home = () => {
 
 <FadeInWrapper delay={0.3}>
   <RSVPForm />
-</FadeInWrapper>
-
-<SectionDivider />
-
-<FadeInWrapper delay={0.4}>
-  <Guestbook />
 </FadeInWrapper>
 
 <SectionDivider />

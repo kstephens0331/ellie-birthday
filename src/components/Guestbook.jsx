@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
@@ -10,6 +10,11 @@ const Guestbook = () => {
   const [photo, setPhoto] = useState(null);
   const guestbookRef = useRef();
 
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("ellieGuestbook")) || [];
+    setMessages(stored);
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name && message) {
@@ -17,8 +22,11 @@ const Guestbook = () => {
         name,
         message,
         photo: photo ? URL.createObjectURL(photo) : null,
+        timestamp: new Date().toISOString(),
       };
-      setMessages([newEntry, ...messages]);
+      const updated = [newEntry, ...messages];
+      setMessages(updated);
+      localStorage.setItem("ellieGuestbook", JSON.stringify(updated));
       setName("");
       setMessage("");
       setPhoto(null);
@@ -41,7 +49,9 @@ const Guestbook = () => {
 
   return (
     <section id="guestbook" className="bg-cream py-16 px-4 text-center font-serif relative z-10">
-      <h2 className="text-2xl md:text-3xl font-semibold mb-6">Leave Ellie a Message, add a photo if you'd like!</h2>
+      <h2 className="text-2xl md:text-3xl font-semibold mb-6">
+        Leave Ellie a Message, add a photo if you'd like!
+      </h2>
 
       <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-4">
         <input

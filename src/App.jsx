@@ -6,8 +6,8 @@ import StickyRSVPButton from "./components/StickyRSVPButton";
 import { HelmetProvider } from "react-helmet-async";
 import ScrollProgressBar from "./components/ScrollProgressBar";
 import BackToTopButton from "./components/BackToTopButton";
-import ShareButton from "./components/ShareButton";
-
+import ShareButton from "./components/ShareButton";import Guestbook from "./pages/Guestbook";
+import Gallery from "./pages/Gallery";
 
 function App() {
   return (
@@ -20,7 +20,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* Future pages go here */}
+        <Route path="/guestbook" element={<Guestbook />} />
+        <Route path="/gallery" element={<Gallery />} />
       </Routes>
       <StickyRSVPButton />
     </Router>
