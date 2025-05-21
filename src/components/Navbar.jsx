@@ -10,8 +10,8 @@ const Navbar = () => {
   <li><HashLink smooth to="/#hero" className="hover:underline">Home</HashLink></li>
   <li><HashLink smooth to="/#details" className="hover:underline">Details</HashLink></li>
   <li><HashLink smooth to="/#rsvp" className="hover:underline">RSVP</HashLink></li>
-  <li><Link to="/guestbook" className="hover:underline">Guestbook 📖</Link></li>
-  <li><Link to="/gallery" className="hover:underline">Gallery 📸</Link></li>
+  <li><Link to="/guestbook" className="hover:underline">Guestbook </Link></li>
+  <li><Link to="/gallery" className="hover:underline">Gallery </Link></li>
   <li>
     <a
       href="https://www.amazon.com/registries/gl/guest-view/YMLHHKKO2KA9"
@@ -19,7 +19,7 @@ const Navbar = () => {
       rel="noopener noreferrer"
       className="hover:underline text-[#A9745F] font-semibold"
     >
-      Gifts 🎁
+      Gifts 
     </a>
   </li>
 </ul>
