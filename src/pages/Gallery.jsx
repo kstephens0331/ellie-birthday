@@ -65,10 +65,7 @@ const Gallery = () => {
   const [guestPhotos, setGuestPhotos] = useState([]);
 
   const staticImages = [
-    ellie1, ellie2, ellie3, ellie4, ellie5,
-    ellie6, ellie7, ellie8, ellie9, ellie10,
-    ellie11, ellie12, ellie13, ellie14, ellie15,
-    ellie16, ellie17, ellie18, ellie19, ellie20,
+    
     ellie21, IMG1828, IMG1419, IMG_1039, DSC1532,
     DSC1451, DSC1449, DSC1214, DSC1165, DSC1014,
     DSC0746, IMG8383, IMG8239, IMG8238, IMG8008,
