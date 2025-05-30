@@ -29,6 +29,36 @@ import ellie17 from "../assets/images/ellie_17.jpg";
 import ellie18 from "../assets/images/ellie_18.jpg";
 import ellie19 from "../assets/images/ellie_19.jpg";
 import ellie20 from "../assets/images/ellie_20.jpg";
+import ellie21 from "../assets/images/ellie_21.JPG";
+import DSC0746 from "../assets/images/DSC_0746.JPG";
+import DSC1014 from "../assets/images/DSC_1014.JPG";
+import DSC1165 from "../assets/images/DSC_1165.JPG";
+import DSC1214 from "../assets/images/DSC_1214.JPG";
+import DSC1449 from "../assets/images/DSC_1449.JPG";
+import DSC1451 from "../assets/images/DSC_1451.JPG";
+import DSC1532 from "../assets/images/DSC_1532.JPG";
+import IMG_1039 from "../assets/images/IMG_1039.JPG";
+import IMG1419 from "../assets/images/IMG_1419.JPG";
+import IMG1828 from "../assets/images/IMG_1828.JPG";
+import IMG2302 from "../assets/images/IMG_2302.jpeg";
+import IMG2304 from "../assets/images/IMG_2304.jpeg";
+import IMG2880 from "../assets/images/IMG_2880.JPG";
+import IMG3457 from "../assets/images/IMG_3457.JPG";
+import IMG4825 from "../assets/images/IMG_4825.JPG";
+import IMG4890 from "../assets/images/IMG_4890.JPG";
+import IMG5648 from "../assets/images/IMG_5648.JPG";
+import IMG5649 from "../assets/images/IMG_5649.JPG";
+import IMG7793 from "../assets/images/IMG_7793.jpeg";
+import IMG7863 from "../assets/images/IMG_7863.jpeg";
+import IMG7873 from "../assets/images/IMG_7873.jpeg";
+import IMG7880 from "../assets/images/IMG_7880.jpeg";
+import IMG7970 from "../assets/images/IMG_7970.jpeg";
+import IMG7971 from "../assets/images/IMG_7971.jpeg";
+import IMG7991 from "../assets/images/IMG_7991.jpeg";
+import IMG8008 from "../assets/images/IMG_8008.jpeg";
+import IMG8238 from "../assets/images/IMG_8238.jpeg";
+import IMG8239 from "../assets/images/IMG_8239.jpeg";
+import IMG8383 from "../assets/images/IMG_8383.jpeg";
 
 const Gallery = () => {
   const [fullscreenImage, setFullscreenImage] = useState(null);
@@ -39,6 +69,12 @@ const Gallery = () => {
     ellie6, ellie7, ellie8, ellie9, ellie10,
     ellie11, ellie12, ellie13, ellie14, ellie15,
     ellie16, ellie17, ellie18, ellie19, ellie20,
+    ellie21, IMG1828, IMG1419, IMG_1039, DSC1532,
+    DSC1451, DSC1449, DSC1214, DSC1165, DSC1014,
+    DSC0746, IMG8383, IMG8239, IMG8238, IMG8008,
+    IMG7991, IMG7971, IMG7970, IMG7880, IMG7873,
+    IMG7863, IMG7793, IMG5649, IMG5648, IMG4890, 
+    IMG4825, IMG3457, IMG2880, IMG2304, IMG2302,
   ];
 
   useEffect(() => {
