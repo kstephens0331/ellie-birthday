@@ -69,7 +69,7 @@ const HeroSection = () => {
 <div className="flex flex-col items-center mt-10">
   <div className="flex flex-row justify-center w-full max-w-4xl gap-6">
     <motion.img
-      src={bean}
+      src={inviteImage}
       alt="Bean Image Left"
       className="w-1/2 rounded shadow-md"
       initial={{ opacity: 0, scale: 0.95 }}
