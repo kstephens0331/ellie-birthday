@@ -69,7 +69,7 @@ import IMG2113 from "../assets/images/IMG_2113.jpeg";
 import IMG2114 from "../assets/images/IMG_2114.JPG";
 import IMG2207 from "../assets/images/IMG_2207.jpeg";
 import IMG2383 from "../assets/images/IMG_2383.jpeg";
-import IMG2879 from "../assets/images/IMG_2879.jpeg";
+import IMG2879 from "../assets/images/IMG_2879.JPG";
 import IMG3468 from "../assets/images/IMG_3468.jpeg";
 import IMG5018 from "../assets/images/IMG_5018.jpeg";
 import IMG5685 from "../assets/images/IMG_5685.jpeg";
@@ -123,7 +123,7 @@ ellie21, IMG1828, IMG1419, IMG_1039, DSC1532,
 
   return (
     <section id="gallery" className="bg-cream py-16 px-4 font-serif text-center relative z-10">
-      <h2 className="text-2xl md:text-3xl font-semibold mb-8">A Look Back at the Day ☀️</h2>
+      <h2 className="text-2xl md:text-3xl font-semibold mb-8">A Look Back at the Year! ☀️</h2>
 
       <div className="max-w-4xl mx-auto">
         <Swiper
@@ -131,7 +131,7 @@ ellie21, IMG1828, IMG1419, IMG_1039, DSC1532,
           navigation
           pagination={{ clickable: true }}
           loop={true}
-          autoplay={{ delay: 3500, disableOnInteraction: false }}
+          autoplay={{ delay: 2500, disableOnInteraction: false }}
           spaceBetween={20}
           slidesPerView={1}
           className="rounded-lg overflow-hidden"
