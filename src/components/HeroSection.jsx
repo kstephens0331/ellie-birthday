@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import inviteImage from "../assets/images/invite.png";
+import bean from "../assets/images/IMG_2383.jpeg"
 
 const HeroSection = () => {
   return (
@@ -65,15 +66,25 @@ const HeroSection = () => {
       </p>
 
       {/* Placeholder image area */}
-      <div className="flex flex-col items-center mt-10">
-  <motion.img
-    src={inviteImage}
-    alt="Ellie's Birthday Invite"
-    className="w-full max-w-md rounded shadow-md"
-    initial={{ opacity: 0, scale: 0.95 }}
-  animate={{ opacity: 1, scale: 1 }}
-  transition={{ duration: 0.6, ease: "easeOut" }}
-  />
+<div className="flex flex-col items-center mt-10">
+  <div className="flex flex-row justify-center w-full max-w-4xl gap-6">
+    <motion.img
+      src={bean}
+      alt="Bean Image Left"
+      className="w-1/2 rounded shadow-md"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    />
+    <motion.img
+      src={bean}
+      alt="Bean Image Right"
+      className="w-1/2 rounded shadow-md"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    />
+  </div>
 </div>
     </section>
   );
