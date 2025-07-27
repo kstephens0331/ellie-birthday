@@ -59,6 +59,28 @@ import IMG8008 from "../assets/images/IMG_8008.jpeg";
 import IMG8238 from "../assets/images/IMG_8238.jpeg";
 import IMG8239 from "../assets/images/IMG_8239.jpeg";
 import IMG8383 from "../assets/images/IMG_8383.jpeg";
+import IMG0093 from "../assets/images/IMG_0093.jpeg";
+import IMG0552 from "../assets/images/IMG_0552.jpeg";
+import IMG0645 from "../assets/images/IMG_0645.jpeg";
+import IMG1338 from "../assets/images/IMG_1338.jpeg";
+import IMG1342 from "../assets/images/IMG_1342.jpeg";
+import IMG2050 from "../assets/images/IMG_2050.jpeg";
+import IMG2113 from "../assets/images/IMG_2113.jpeg";
+import IMG2114 from "../assets/images/IMG_2114.JPG";
+import IMG2207 from "../assets/images/IMG_2207.jpeg";
+import IMG2383 from "../assets/images/IMG_2383.jpeg";
+import IMG2879 from "../assets/images/IMG_2879.jpeg";
+import IMG3468 from "../assets/images/IMG_3468.jpeg";
+import IMG5018 from "../assets/images/IMG_5018.jpeg";
+import IMG5685 from "../assets/images/IMG_5685.jpeg";
+import IMG8514 from "../assets/images/IMG_8514.jpeg";
+import IMG8546 from "../assets/images/IMG_8546.JPG";
+import IMG8586 from "../assets/images/IMG_8586.JPG";
+import IMG8980 from "../assets/images/IMG_8980.jpeg";
+import IMG9051 from "../assets/images/IMG_9051.jpeg";
+import IMG9080 from "../assets/images/IMG_9080.jpeg";
+import IMG9137 from "../assets/images/IMG_9137.JPG";
+import IMG9396 from "../assets/images/IMG_9396.jpeg";
 
 const Gallery = () => {
   const [fullscreenImage, setFullscreenImage] = useState(null);
@@ -66,12 +88,18 @@ const Gallery = () => {
 
   const staticImages = [
     
-    ellie21, IMG1828, IMG1419, IMG_1039, DSC1532,
+    ellie1, ellie2, ellie3, ellie4, ellie5, ellie6, ellie7, ellie8, ellie9, ellie10, ellie11, ellie12, ellie13, ellie14, ellie15, ellie16, ellie17, ellie18, ellie19, ellie20,
+ellie21, IMG1828, IMG1419, IMG_1039, DSC1532,
     DSC1451, DSC1449, DSC1214, DSC1165, DSC1014,
     DSC0746, IMG8383, IMG8239, IMG8238, IMG8008,
     IMG7991, IMG7971, IMG7970, IMG7880, IMG7873,
     IMG7863, IMG7793, IMG5649, IMG5648, IMG4890, 
     IMG4825, IMG3457, IMG2880, IMG2304, IMG2302,
+    IMG0093, IMG0552, IMG0645, IMG1338, IMG1342,
+    IMG2050, IMG2113, IMG2114, IMG2207, IMG2383,
+    IMG2879, IMG3468, IMG5018, IMG5685, IMG8514,
+    IMG8546, IMG8586, IMG8980, IMG9051, IMG9080,
+    IMG9137, IMG9396
   ];
 
   useEffect(() => {
