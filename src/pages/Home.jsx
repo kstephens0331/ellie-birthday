@@ -6,7 +6,7 @@ import FadeInWrapper from "../components/FadeInWrapper";
 import Footer from "../components/Footer";
 import SectionDivider from "../components/SectionDivider";
 import { Helmet } from "react-helmet-async";
-import menu from "../assets/images/menu.jpeg"
+
 
 
 const Home = () => {
