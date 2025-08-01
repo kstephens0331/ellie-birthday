@@ -44,19 +44,6 @@ const Home = () => {
 
 <SectionDivider />
 
-<FadeInWrapper delay={0.1}>
-    <div className="flex flex-row justify-center w-full max-w-4xl">
-    <motion.img
-      src={menu}
-      alt="menu for party"
-      className="w-1/2 rounded shadow-md"
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    />
-    </div>
-</FadeInWrapper>
-
 <SectionDivider />
 
 <FadeInWrapper delay={0.2}>
