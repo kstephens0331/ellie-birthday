@@ -36,7 +36,7 @@ const RSVPForm = () => {
               <p className="text-green-600 font-semibold mt-20">RSVP submitted! Thank you 🥰</p>
             ) : (
               <form
-  action="https://formspree.io/f/xnndrwjy"
+  action="https://formspree.io/f/mvgqqyzb"
   method="POST"
   className="space-y-4 text-left"
 >

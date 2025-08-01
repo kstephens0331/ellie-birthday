@@ -10,10 +10,12 @@ const SectionDivider = () => {
       viewport={{ once: true }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <img
+      <motion.img
         src={swirl}
         alt="Latte swirl divider"
-        className="max-w-xs md:max-w-sm opacity-50"
+        className="w-full max-w-6xl h-auto opacity-50"
+        animate={{ scale: [1, 1.01, 1] }}
+        transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
       />
     </motion.div>
   );

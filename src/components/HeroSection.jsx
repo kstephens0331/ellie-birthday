@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import inviteImage from "../assets/images/invite.png";
-import bean from "../assets/images/IMG_2383.jpeg"
+import bean from "../assets/images/IMG_2383.jpeg";
 
 const HeroSection = () => {
   return (
