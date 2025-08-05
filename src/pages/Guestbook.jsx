@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import supabase from "../supabase"; // Make sure this is set up as shown above
+import supabase from "../utils/supabase";
 
 const Guestbook = () => {
   const [entries, setEntries] = useState([]);

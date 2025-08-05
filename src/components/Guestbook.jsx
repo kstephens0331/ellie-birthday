@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import supabase from "../supabase"; // Your configured Supabase client
+import supabase from "../utils/supabase";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
