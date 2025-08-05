@@ -26,12 +26,21 @@ useEffect(() => {
 
   fetchMessages();
 
-  const sub = supabase
-    .channel("guestbook-realtime")
-    .on("postgres_changes", { event: "INSERT", schema: "public", table: "guestbook" }, (payload) => {
+const sub = supabase
+  .channel("guestbook-realtime")
+  .on(
+    'postgres_changes',
+    {
+      event: '*',  // all changes
+      schema: 'public',
+      table: 'guestbook'
+    },
+    (payload) => {
+      console.log("Realtime payload:", payload.new);
       setEntries((prev) => [payload.new, ...prev]);
-    })
-    .subscribe();
+    }
+  )
+  .subscribe();
 
   return () => {
     supabase.removeChannel(sub);
@@ -127,7 +136,13 @@ const handleSubmit = async (e) => {
 
       {/* Scrapbook-style entries */}
       <div className="relative w-full h-[1600px]">
+        {entries.length === 0 && (
+  <p className="text-center text-sm text-coffee/70 italic">
+    No messages yet — be the first to sign the guestbook!
+  </p>
+)}
         {entries.map((entry, index) => {
+              console.log("Rendering entry:", entry);
   const rotation = Math.floor(Math.random() * 12) - 6;
   const top = Math.floor(Math.random() * 1200) + 100;
   const left = Math.floor(Math.random() * 70) + 10;
