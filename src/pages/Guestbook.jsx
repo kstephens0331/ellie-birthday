@@ -38,38 +38,55 @@ const Guestbook = () => {
     };
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!name || !message) return;
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!name || !message) return;
 
-    let photoUrl = null;
+  let photoUrl = null;
 
-    if (photo) {
-      const fileName = `${Date.now()}_${photo.name}`;
-      const { data, error: uploadError } = await supabase.storage
-        .from("guestbook")
-        .upload(fileName, photo);
+  if (photo) {
+    const fileName = `${Date.now()}_${photo.name}`;
 
-      if (!uploadError) {
-        const { data: urlData } = supabase.storage
-          .from("guestbook")
-          .getPublicUrl(fileName);
-        photoUrl = urlData.publicUrl;
-      }
+    // Use upsert to avoid duplicate name conflict
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from("guestbook")
+      .upload(fileName, photo, {
+        cacheControl: "3600",
+        upsert: false, // Change to true if you want to overwrite duplicates
+      });
+
+    if (uploadError) {
+      console.error("Upload error:", uploadError.message);
+      alert("Photo upload failed. Please try again.");
+      return;
     }
 
-    await supabase.from("guestbook").insert([
-      {
-        name,
-        message,
-        photo: photoUrl,
-      },
-    ]);
+    const { data: urlData } = supabase.storage
+      .from("guestbook")
+      .getPublicUrl(fileName);
 
-    setName("");
-    setMessage("");
-    setPhoto(null);
-  };
+    photoUrl = urlData.publicUrl;
+  }
+
+  const { error: insertError } = await supabase.from("guestbook").insert([
+    {
+      name,
+      message,
+      photo: photoUrl,
+    },
+  ]);
+
+  if (insertError) {
+    console.error("Insert error:", insertError.message);
+    alert("Could not post your message. Please try again.");
+    return;
+  }
+
+  // Reset form
+  setName("");
+  setMessage("");
+  setPhoto(null);
+};
 
   return (
     <section className="relative min-h-screen bg-cream overflow-hidden px-4 py-12 font-serif text-coffee">
