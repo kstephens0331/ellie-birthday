@@ -13,7 +13,7 @@ useEffect(() => {
   const fetchMessages = async () => {
     const { data, error } = await supabase
       .from("guestbook")
-      .select("*")
+        .select("id, name, message, photo, created")
       .order("created", { ascending: false });
 
     if (error) {
@@ -70,11 +70,12 @@ const handleSubmit = async (e) => {
       return;
     }
 
-    const { data: urlData } = supabase.storage
-      .from("guestbook")
-      .getPublicUrl(fileName);
+    const { data: urlData } = supabase
+  .storage
+  .from("guestbook")
+  .getPublicUrl(fileName);
 
-    photoUrl = urlData.publicUrl;
+console.log("photoUrl:", urlData.publicUrl);
   }
 
   const { error: insertError } = await supabase.from("guestbook").insert([
