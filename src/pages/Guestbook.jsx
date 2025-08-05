@@ -8,6 +8,8 @@ const Guestbook = () => {
   const [message, setMessage] = useState("");
   const [photo, setPhoto] = useState(null);
 
+  const positionCache = useRef({});
+
   // Fetch and subscribe to guestbook entries
 useEffect(() => {
   const fetchMessages = async () => {
@@ -70,12 +72,13 @@ const handleSubmit = async (e) => {
       return;
     }
 
-    const { data: urlData } = supabase
+const { data: urlData } = supabase
   .storage
   .from("guestbook")
   .getPublicUrl(fileName);
 
-console.log("photoUrl:", urlData.publicUrl);
+photoUrl = urlData.publicUrl;
+console.log("photoUrl:", photoUrl);
   }
 
   const { error: insertError } = await supabase.from("guestbook").insert([
