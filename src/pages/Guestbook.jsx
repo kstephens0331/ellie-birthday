@@ -142,11 +142,16 @@ console.log("photoUrl:", urlData.publicUrl);
     No messages yet — be the first to sign the guestbook!
   </p>
 )}
-        {entries.map((entry, index) => {
-              console.log("Rendering entry:", entry);
-  const rotation = Math.floor(Math.random() * 12) - 6;
-  const top = Math.floor(Math.random() * 1200) + 100;
-  const left = Math.floor(Math.random() * 70) + 10;
+       {entries.map((entry, index) => {
+  if (!positionCache.current[entry.id]) {
+    positionCache.current[entry.id] = {
+      rotation: Math.floor(Math.random() * 12) - 6,
+      top: Math.floor(Math.random() * 1200) + 100,
+      left: Math.floor(Math.random() * 70) + 10,
+    };
+  }
+
+  const { rotation, top, left } = positionCache.current[entry.id];
 
   return (
     <motion.div
