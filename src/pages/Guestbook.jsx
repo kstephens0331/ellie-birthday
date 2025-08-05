@@ -1,19 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { db, storage } from "../firebase";
-import {
-  addDoc,
-  collection,
-  onSnapshot,
-  orderBy,
-  query,
-  serverTimestamp,
-} from "firebase/firestore";
-import {
-  ref,
-  uploadBytes,
-  getDownloadURL
-} from "firebase/storage";
+import supabase from "../supabase"; // Make sure this is set up as shown above
 
 const Guestbook = () => {
   const [entries, setEntries] = useState([]);
@@ -21,13 +8,34 @@ const Guestbook = () => {
   const [message, setMessage] = useState("");
   const [photo, setPhoto] = useState(null);
 
+  // Fetch and subscribe to guestbook entries
   useEffect(() => {
-    const q = query(collection(db, "guestbook"), orderBy("created", "desc"));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const updated = snapshot.docs.map((doc) => doc.data());
-      setEntries(updated);
-    });
-    return () => unsubscribe();
+    const fetchEntries = async () => {
+      const { data, error } = await supabase
+        .from("guestbook")
+        .select("*")
+        .order("created", { ascending: false });
+
+      if (!error) setEntries(data);
+    };
+
+    fetchEntries();
+
+    // Real-time updates via Supabase Edge
+    const subscription = supabase
+      .channel("guestbook-realtime")
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "guestbook" },
+        (payload) => {
+          setEntries((prev) => [payload.new, ...prev]);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(subscription);
+    };
   }, []);
 
   const handleSubmit = async (e) => {
@@ -37,17 +45,26 @@ const Guestbook = () => {
     let photoUrl = null;
 
     if (photo) {
-      const storageRef = ref(storage, `guestbook/${Date.now()}_${photo.name}`);
-      const snapshot = await uploadBytes(storageRef, photo);
-      photoUrl = await getDownloadURL(snapshot.ref);
+      const fileName = `${Date.now()}_${photo.name}`;
+      const { data, error: uploadError } = await supabase.storage
+        .from("guestbook")
+        .upload(fileName, photo);
+
+      if (!uploadError) {
+        const { data: urlData } = supabase.storage
+          .from("guestbook")
+          .getPublicUrl(fileName);
+        photoUrl = urlData.publicUrl;
+      }
     }
 
-    await addDoc(collection(db, "guestbook"), {
-      name,
-      message,
-      photo: photoUrl,
-      created: serverTimestamp(),
-    });
+    await supabase.from("guestbook").insert([
+      {
+        name,
+        message,
+        photo: photoUrl,
+      },
+    ]);
 
     setName("");
     setMessage("");
@@ -94,13 +111,13 @@ const Guestbook = () => {
       {/* Scrapbook-style entries */}
       <div className="relative w-full h-[1600px]">
         {entries.map((entry, index) => {
-          const rotation = Math.floor(Math.random() * 12) - 6; // -6 to +6 deg
+          const rotation = Math.floor(Math.random() * 12) - 6;
           const top = Math.floor(Math.random() * 1200) + 100;
           const left = Math.floor(Math.random() * 70) + 10;
 
           return (
             <motion.div
-              key={index}
+              key={entry.id || index}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.05 }}

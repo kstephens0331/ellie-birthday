@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import supabase from "../supabase"; // Your configured Supabase client
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
@@ -11,26 +12,60 @@ const Guestbook = () => {
   const guestbookRef = useRef();
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("ellieGuestbook")) || [];
-    setMessages(stored);
+    const fetchMessages = async () => {
+      const { data, error } = await supabase
+        .from("guestbook")
+        .select("*")
+        .order("created", { ascending: false });
+
+      if (!error) setMessages(data);
+    };
+
+    fetchMessages();
+
+    const sub = supabase
+      .channel("guestbook-realtime")
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "guestbook" },
+        (payload) => {
+          setMessages((prev) => [payload.new, ...prev]);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(sub);
+    };
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (name && message) {
-      const newEntry = {
-        name,
-        message,
-        photo: photo ? URL.createObjectURL(photo) : null,
-        timestamp: new Date().toISOString(),
-      };
-      const updated = [newEntry, ...messages];
-      setMessages(updated);
-      localStorage.setItem("ellieGuestbook", JSON.stringify(updated));
-      setName("");
-      setMessage("");
-      setPhoto(null);
+    if (!name || !message) return;
+
+    let photoUrl = null;
+
+    if (photo) {
+      const fileName = `${Date.now()}_${photo.name}`;
+      const { data, error: uploadError } = await supabase.storage
+        .from("guestbook")
+        .upload(fileName, photo);
+
+      if (!uploadError) {
+        const { data: urlData } = supabase.storage
+          .from("guestbook")
+          .getPublicUrl(fileName);
+        photoUrl = urlData.publicUrl;
+      }
     }
+
+    await supabase.from("guestbook").insert([
+      { name, message, photo: photoUrl },
+    ]);
+
+    setName("");
+    setMessage("");
+    setPhoto(null);
   };
 
   const handleDownloadPDF = async () => {
@@ -93,7 +128,7 @@ const Guestbook = () => {
         >
           {messages.slice(0, 3).map((msg, i) => (
             <motion.div
-              key={i}
+              key={msg.id || i}
               className="bg-white/80 shadow-md rounded-lg p-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
